@@ -9,5 +9,5 @@ TODO: set-up alternatives java, etc.
 
 ## Generate dependencies
 ```
-mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.nttdata.food.order.system*:*"
+mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -DreduceEdges=false -Dscope=compile "-Dincludes=com.nttdata.food.ordering.system*:*"
 ```
