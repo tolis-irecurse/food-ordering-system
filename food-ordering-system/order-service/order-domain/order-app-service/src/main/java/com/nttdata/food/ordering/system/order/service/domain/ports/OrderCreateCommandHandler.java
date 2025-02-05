@@ -1,5 +1,6 @@
 package com.nttdata.food.ordering.system.order.service.domain.ports;
 
+import com.nttdata.food.ordering.system.order.service.domain.ApplicationDomainEventPublisher;
 import com.nttdata.food.ordering.system.order.service.domain.mapper.OrderDataMapper;
 import com.nttdata.food.ordering.system.order.service.domain.payload.create.CreateOrderCommand;
 import com.nttdata.food.ordering.system.order.service.domain.payload.create.CreateOrderResponse;
@@ -15,7 +16,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
@@ -27,18 +27,21 @@ public class OrderCreateCommandHandler {
     private final CustomerRepository customerRepository;
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
+    private final ApplicationDomainEventPublisher applicationDomainEventPublisher;
 
     @Autowired
     public OrderCreateCommandHandler(OrderDomainService orderDomainService,
                                      OrderRepository orderRepository,
                                      CustomerRepository customerRepository,
                                      RestaurantRepository restaurantRepository,
-                                     OrderDataMapper orderDataMapper) {
+                                     OrderDataMapper orderDataMapper,
+                                     ApplicationDomainEventPublisher applicationDomainEventPublisher) {
         this.orderDomainService = orderDomainService;
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
         this.restaurantRepository = restaurantRepository;
         this.orderDataMapper = orderDataMapper;
+        this.applicationDomainEventPublisher = applicationDomainEventPublisher;
     }
 
     @Transactional
@@ -49,8 +52,9 @@ public class OrderCreateCommandHandler {
         var order = orderDataMapper.mapCreateOrderCommandToOrder(createOrderCommand);
         var orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant);
         var orderResult = saveOrder(order);
-
         log.info("Order with id {} has been created", orderResult.getId().getValue());
+
+        applicationDomainEventPublisher.publish(orderCreatedEvent);
         return orderDataMapper.mapOrderToCreateOrderResponse(orderResult);
     }
 
