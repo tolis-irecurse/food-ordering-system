@@ -1,6 +1,5 @@
 package com.nttdata.food.ordering.system.order.service.domain.payload.create;
 
-import com.nttdata.food.ordering.system.service.domain.entity.OrderItem;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
