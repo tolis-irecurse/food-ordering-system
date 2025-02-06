@@ -1,17 +1,19 @@
 package com.nttdata.food.ordering.system.order.service.domain.mapper;
 
-import com.nttdata.food.ordering.system.domain.valueobject.CustomerId;
-import com.nttdata.food.ordering.system.domain.valueobject.Money;
-import com.nttdata.food.ordering.system.domain.valueobject.ProductId;
-import com.nttdata.food.ordering.system.domain.valueobject.RestaurantId;
-import com.nttdata.food.ordering.system.order.service.domain.payload.create.CreateOrderCommand;
-import com.nttdata.food.ordering.system.order.service.domain.payload.create.CreateOrderResponse;
-import com.nttdata.food.ordering.system.order.service.domain.payload.create.OrderAddress;
-import com.nttdata.food.ordering.system.service.domain.entity.Order;
-import com.nttdata.food.ordering.system.service.domain.entity.OrderItem;
-import com.nttdata.food.ordering.system.service.domain.entity.Product;
-import com.nttdata.food.ordering.system.service.domain.entity.Restaurant;
-import com.nttdata.food.ordering.system.service.domain.valueobject.StreetAddress;
+import com.nttdata.food.ordering.system.common.domain.valueobject.CustomerId;
+import com.nttdata.food.ordering.system.common.domain.valueobject.Money;
+import com.nttdata.food.ordering.system.common.domain.valueobject.ProductId;
+import com.nttdata.food.ordering.system.common.domain.valueobject.RestaurantId;
+import com.nttdata.food.ordering.system.order.service.domain.dto.create.CreateOrderCommandDTO;
+import com.nttdata.food.ordering.system.order.service.domain.dto.create.CreateOrderResponseDTO;
+import com.nttdata.food.ordering.system.order.service.domain.dto.create.OrderAddressDTO;
+import com.nttdata.food.ordering.system.order.service.domain.dto.create.OrderItemDTO;
+import com.nttdata.food.ordering.system.order.service.domain.dto.track.TrackOrderResponseDTO;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Order;
+import com.nttdata.food.ordering.system.service.domain.model.entity.OrderItem;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Product;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Restaurant;
+import com.nttdata.food.ordering.system.service.domain.model.valueobject.StreetAddress;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 @Component
 public class OrderDataMapper {
 
-    public Restaurant mapCreateOrderCommandToRestaurant(CreateOrderCommand createOrderCommand) {
+    public Restaurant mapCreateOrderCommandDTOToRestaurant(CreateOrderCommandDTO createOrderCommand) {
         return Restaurant.builder()
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
                 .products(createOrderCommand.getItems().stream()
@@ -31,24 +33,32 @@ public class OrderDataMapper {
                 .build();
     }
 
-    public Order mapCreateOrderCommandToOrder(CreateOrderCommand createOrderCommand) {
+    public Order mapCreateOrderCommandDTOToOrder(CreateOrderCommandDTO createOrderCommand) {
         return Order.builder()
                 .customerId(new CustomerId(createOrderCommand.getCustomerId()))
                 .restaurantId(new RestaurantId(createOrderCommand.getRestaurantId()))
-                .deliveryAddress(mapOrderAddressToStreetAddress(createOrderCommand.getAddress()))
+                .deliveryAddress(mapOrderAddressDTOToStreetAddress(createOrderCommand.getAddress()))
                 .price(new Money(createOrderCommand.getPrice()))
-                .items(mapOrderItemsToOrderItemEntities(createOrderCommand.getItems()))
+                .items(mapOrderItemDTOsToOrderItems(createOrderCommand.getItems()))
                 .build();
     }
 
-    public CreateOrderResponse mapOrderToCreateOrderResponse(Order order) {
-        return CreateOrderResponse.builder()
+    public CreateOrderResponseDTO mapOrderToCreateOrderResponseDTO(Order order) {
+        return CreateOrderResponseDTO.builder()
                 .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
                 .build();
     }
 
-    private List<OrderItem> mapOrderItemsToOrderItemEntities(List<com.nttdata.food.ordering.system.order.service.domain.payload.create.OrderItem> orderItems) {
+    public TrackOrderResponseDTO mapOrderToTrackOrderResponseDTO(Order order) {
+        return TrackOrderResponseDTO.builder()
+                .orderTrackingId(order.getTrackingId().getValue())
+                .orderStatus(order.getOrderStatus())
+                .failureMessages(order.getFailureMessages())
+                .build();
+    }
+
+    private List<OrderItem> mapOrderItemDTOsToOrderItems(List<OrderItemDTO> orderItems) {
         return orderItems.stream()
                 .map(orderItem ->
                     OrderItem.builder()
@@ -61,7 +71,7 @@ public class OrderDataMapper {
                 .collect(Collectors.toList());
     }
 
-    private StreetAddress mapOrderAddressToStreetAddress(@NotNull OrderAddress orderAddress) {
+    private StreetAddress mapOrderAddressDTOToStreetAddress(@NotNull OrderAddressDTO orderAddress) {
         return new StreetAddress(
             UUID.randomUUID(),
             orderAddress.getStreet(),

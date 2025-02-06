@@ -1,10 +1,10 @@
 package com.nttdata.food.ordering.system.service.domain;
 
-import com.nttdata.food.ordering.system.service.domain.entity.Order;
-import com.nttdata.food.ordering.system.service.domain.entity.Restaurant;
 import com.nttdata.food.ordering.system.service.domain.event.OrderCancelledEvent;
 import com.nttdata.food.ordering.system.service.domain.event.OrderCreatedEvent;
 import com.nttdata.food.ordering.system.service.domain.event.OrderPaidEvent;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Order;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Restaurant;
 
 import java.util.List;
 

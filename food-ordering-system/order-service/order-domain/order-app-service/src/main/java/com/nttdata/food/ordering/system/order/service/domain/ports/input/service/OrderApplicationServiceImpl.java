@@ -1,9 +1,9 @@
 package com.nttdata.food.ordering.system.order.service.domain.ports.input.service;
 
-import com.nttdata.food.ordering.system.order.service.domain.payload.create.CreateOrderCommand;
-import com.nttdata.food.ordering.system.order.service.domain.payload.create.CreateOrderResponse;
-import com.nttdata.food.ordering.system.order.service.domain.payload.track.TrackOrderQuery;
-import com.nttdata.food.ordering.system.order.service.domain.payload.track.TrackOrderResponse;
+import com.nttdata.food.ordering.system.order.service.domain.dto.create.CreateOrderCommandDTO;
+import com.nttdata.food.ordering.system.order.service.domain.dto.create.CreateOrderResponseDTO;
+import com.nttdata.food.ordering.system.order.service.domain.dto.track.TrackOrderQueryDTO;
+import com.nttdata.food.ordering.system.order.service.domain.dto.track.TrackOrderResponseDTO;
 import com.nttdata.food.ordering.system.order.service.domain.ports.OrderCreateCommandHandler;
 import com.nttdata.food.ordering.system.order.service.domain.ports.TrackOrderCommandHandler;
 import lombok.extern.slf4j.Slf4j;
@@ -24,12 +24,12 @@ class OrderApplicationServiceImpl implements OrderApplicationService {
     }
 
     @Override
-    public CreateOrderResponse createOrder(CreateOrderCommand createOrderCommand) {
+    public CreateOrderResponseDTO createOrder(CreateOrderCommandDTO createOrderCommand) {
         return orderCreateCommandHandler.createOrder(createOrderCommand);
     }
 
     @Override
-    public TrackOrderResponse trackOrder(TrackOrderQuery trackOrderQuery) {
+    public TrackOrderResponseDTO trackOrder(TrackOrderQueryDTO trackOrderQuery) {
         return trackOrderCommandHandler.trackOrder(trackOrderQuery);
     }
 }

@@ -1,12 +1,12 @@
 package com.nttdata.food.ordering.system.service.domain;
 
-import com.nttdata.food.ordering.system.service.domain.entity.Order;
-import com.nttdata.food.ordering.system.service.domain.entity.OrderItem;
-import com.nttdata.food.ordering.system.service.domain.entity.Restaurant;
 import com.nttdata.food.ordering.system.service.domain.event.OrderCancelledEvent;
 import com.nttdata.food.ordering.system.service.domain.event.OrderCreatedEvent;
 import com.nttdata.food.ordering.system.service.domain.event.OrderPaidEvent;
 import com.nttdata.food.ordering.system.service.domain.exception.OrderDomainException;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Order;
+import com.nttdata.food.ordering.system.service.domain.model.entity.OrderItem;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Restaurant;
 import lombok.extern.slf4j.Slf4j;
 
 import java.time.ZoneId;

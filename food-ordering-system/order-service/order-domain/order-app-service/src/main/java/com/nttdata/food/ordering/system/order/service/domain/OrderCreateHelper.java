@@ -1,18 +1,18 @@
 package com.nttdata.food.ordering.system.order.service.domain;
 
+import com.nttdata.food.ordering.system.order.service.domain.dto.create.CreateOrderCommandDTO;
 import com.nttdata.food.ordering.system.order.service.domain.mapper.OrderDataMapper;
-import com.nttdata.food.ordering.system.order.service.domain.payload.create.CreateOrderCommand;
 import com.nttdata.food.ordering.system.order.service.domain.ports.output.repository.CustomerRepository;
 import com.nttdata.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
 import com.nttdata.food.ordering.system.order.service.domain.ports.output.repository.RestaurantRepository;
 import com.nttdata.food.ordering.system.service.domain.OrderDomainService;
-import com.nttdata.food.ordering.system.service.domain.entity.Order;
-import com.nttdata.food.ordering.system.service.domain.entity.Restaurant;
 import com.nttdata.food.ordering.system.service.domain.event.OrderCreatedEvent;
 import com.nttdata.food.ordering.system.service.domain.exception.OrderDomainException;
-import jakarta.transaction.Transactional;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Order;
+import com.nttdata.food.ordering.system.service.domain.model.entity.Restaurant;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
@@ -38,11 +38,11 @@ public class OrderCreateHelper {
     }
 
     @Transactional
-    public OrderCreatedEvent persistOrder(CreateOrderCommand createOrderCommand) {
+    public OrderCreatedEvent persistOrder(CreateOrderCommandDTO createOrderCommand) {
         checkCustomer(createOrderCommand.getCustomerId());
 
         var restaurant = checkRestaurant(createOrderCommand);
-        var order = orderDataMapper.mapCreateOrderCommandToOrder(createOrderCommand);
+        var order = orderDataMapper.mapCreateOrderCommandDTOToOrder(createOrderCommand);
         var orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant);
         saveOrder(order);
         log.info("Order with id {} has been created", orderCreatedEvent.getOrder().getId().getValue() );
@@ -50,8 +50,8 @@ public class OrderCreateHelper {
         return orderCreatedEvent;
     }
 
-    private Restaurant checkRestaurant(CreateOrderCommand createOrderCommand) {
-        Restaurant cmdRestaurant = orderDataMapper.mapCreateOrderCommandToRestaurant(createOrderCommand);
+    private Restaurant checkRestaurant(CreateOrderCommandDTO createOrderCommand) {
+        Restaurant cmdRestaurant = orderDataMapper.mapCreateOrderCommandDTOToRestaurant(createOrderCommand);
 
         return restaurantRepository.findRestaurantInformation(cmdRestaurant.getId())
                 .orElseThrow( () -> {

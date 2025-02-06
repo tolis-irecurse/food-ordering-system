@@ -1,6 +1,6 @@
 package com.nttdata.food.ordering.system.service.domain.exception;
 
-import com.nttdata.food.ordering.system.domain.exception.DomainException;
+import com.nttdata.food.ordering.system.common.domain.exception.DomainException;
 
 public class OrderDomainException extends DomainException {
 

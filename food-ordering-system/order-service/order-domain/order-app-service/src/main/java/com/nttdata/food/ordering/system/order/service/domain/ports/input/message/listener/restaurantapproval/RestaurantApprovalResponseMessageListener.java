@@ -1,11 +1,10 @@
 package com.nttdata.food.ordering.system.order.service.domain.ports.input.message.listener.restaurantapproval;
 
-import com.nttdata.food.ordering.system.order.service.domain.payload.message.PaymentResponse;
-import com.nttdata.food.ordering.system.order.service.domain.payload.message.RestaurantApprovalResponse;
+import com.nttdata.food.ordering.system.order.service.domain.dto.message.RestaurantApprovalResponseMsg;
 
 public interface RestaurantApprovalResponseMessageListener {
 
-    void orderApproved(RestaurantApprovalResponse restaurantApprovalResponse);
+    void orderApproved(RestaurantApprovalResponseMsg restaurantApprovalResponse);
 
-    void orderRejected(RestaurantApprovalResponse restaurantApprovalResponse);
+    void orderRejected(RestaurantApprovalResponseMsg restaurantApprovalResponse);
 }
