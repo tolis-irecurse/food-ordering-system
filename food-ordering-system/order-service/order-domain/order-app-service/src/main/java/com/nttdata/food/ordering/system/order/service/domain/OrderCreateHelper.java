@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.UUID;
 
+import static com.nttdata.food.ordering.system.common.domain.code.DomainErrorCode.*;
+
 @Slf4j
 @Component
 public class OrderCreateHelper {
@@ -55,8 +57,8 @@ public class OrderCreateHelper {
 
         return restaurantRepository.findRestaurantInformation(cmdRestaurant.getId())
                 .orElseThrow( () -> {
-                    log.warn("Could not find restaurant with id {}", createOrderCommand.getRestaurantId());
-                    return new OrderDomainException("Could not find restaurant with id " + createOrderCommand.getRestaurantId());
+                    //log.warn("Could not find restaurant with id {}", createOrderCommand.getRestaurantId(); //TODO Log through controller advice
+                    return new OrderDomainException(RESTAURANT_NOT_FOUND, createOrderCommand.getRestaurantId());
                 });
     }
 
@@ -64,8 +66,8 @@ public class OrderCreateHelper {
 
         customerRepository.findCustomer(customerId)
                 .orElseThrow( () -> {
-                    log.warn("Customer with id {} not found", customerId);
-                    return new OrderDomainException("Could not find customer with id " + customerId);
+                    //log.warn("Customer with id {} not found", customerId); //TODO Log through controller advice
+                    return new OrderDomainException(CUSTOMER_NOT_FOUND, customerId);
                 });
 
     }
@@ -73,8 +75,8 @@ public class OrderCreateHelper {
     private Order saveOrder(Order order) {
         Order orderResult = orderRepository.save(order);
         if (orderResult == null) {
-            log.error("Could not save order with id {}", order);
-            throw new OrderDomainException("Could not save order!");
+            //log.error("Could not save order with id {}", order); //TODO Log through controller advice
+            throw new OrderDomainException(ORDER_COULD_NOT_SAVE, order.getId());
         }
         log.info("Saved order with id {}", orderResult.getId().getValue());
         return orderResult;

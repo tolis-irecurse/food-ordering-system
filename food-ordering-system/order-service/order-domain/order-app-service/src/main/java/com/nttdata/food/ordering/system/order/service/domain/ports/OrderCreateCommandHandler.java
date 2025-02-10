@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import static com.nttdata.food.ordering.system.common.domain.code.DomainInfoCode.ORDER_CREATED_SUCCESSFULLY;
+
 @Slf4j
 @Component
 public class OrderCreateCommandHandler {
@@ -32,6 +34,6 @@ public class OrderCreateCommandHandler {
         log.info("Order with id {} has been created", orderCreatedEvent.getOrder().getId().getValue());
         orderCreatedPaymentRequestMessagePublisher.publish(orderCreatedEvent);
 
-        return orderDataMapper.mapOrderToCreateOrderResponseDTO(orderCreatedEvent.getOrder());
+        return orderDataMapper.mapOrderToCreateOrderResponseDTO(orderCreatedEvent.getOrder(), ORDER_CREATED_SUCCESSFULLY.getMessage());
     }
 }

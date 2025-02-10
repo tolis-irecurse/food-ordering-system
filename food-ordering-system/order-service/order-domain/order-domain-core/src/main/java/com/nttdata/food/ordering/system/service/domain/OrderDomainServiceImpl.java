@@ -13,6 +13,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+import static com.nttdata.food.ordering.system.common.domain.code.DomainErrorCode.RESTAURANT_NOT_ACTIVE;
+
 @Slf4j
 public class OrderDomainServiceImpl implements OrderDomainService {
 
@@ -73,7 +75,7 @@ public class OrderDomainServiceImpl implements OrderDomainService {
 
     private void validateRestaurant(Restaurant restaurant) {
         if (!restaurant.isActive()) {
-            throw new OrderDomainException("Restaurant with id " + restaurant.getId().getValue() + " is currently not active!");
+            throw new OrderDomainException(RESTAURANT_NOT_ACTIVE ,restaurant.getId().getValue());
         }
     }
     //</editor-fold private>

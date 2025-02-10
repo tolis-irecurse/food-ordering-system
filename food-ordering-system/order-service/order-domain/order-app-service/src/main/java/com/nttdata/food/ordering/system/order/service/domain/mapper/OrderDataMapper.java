@@ -43,10 +43,11 @@ public class OrderDataMapper {
                 .build();
     }
 
-    public CreateOrderResponseDTO mapOrderToCreateOrderResponseDTO(Order order) {
+    public CreateOrderResponseDTO mapOrderToCreateOrderResponseDTO(Order order, String message) {
         return CreateOrderResponseDTO.builder()
                 .orderTrackingId(order.getTrackingId().getValue())
                 .orderStatus(order.getOrderStatus())
+                .message(message)
                 .build();
     }
 
