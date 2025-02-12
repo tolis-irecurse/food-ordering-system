@@ -71,6 +71,11 @@
             </dependency>
             <dependency>
                 <groupId>com.nttdata.food.ordering.system</groupId>
+                <artifactId>common-app</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.nttdata.food.ordering.system</groupId>
                 <artifactId>kafka-producer</artifactId>
                 <version>${project.version}</version>
             </dependency>
