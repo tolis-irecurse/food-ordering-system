@@ -109,12 +109,3 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - ${GLOBAL_NETWORK:-kafka}
-
-#  kafka-manager:
-#    image: hlebalbau/kafka-manager:stable
-#    restart: always
-#    ports:
-#      - "9090:9090"
-#    #environment:
-#    networks:
-#      - ${GLOBAL_NETWORK:-kafka}
