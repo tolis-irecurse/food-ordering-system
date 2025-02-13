@@ -46,8 +46,8 @@
         "items":{
           "name":"Product",
           "type":"record",
-          "fields":[
-            {"name":"id", "type": "string", "logicalType": "uuid"},
+          "fields": [
+            {"name":"id", "type": "string", "logicalType": "uuid"}, //TODO: Check this out
             {"name":"quantity", "type": "int"}
           ]
         }

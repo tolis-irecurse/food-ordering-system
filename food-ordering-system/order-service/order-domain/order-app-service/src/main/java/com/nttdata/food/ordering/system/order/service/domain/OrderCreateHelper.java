@@ -55,7 +55,7 @@ public class OrderCreateHelper {
     private Restaurant checkRestaurant(CreateOrderCommandDTO createOrderCommand) {
         Restaurant cmdRestaurant = orderDataMapper.mapCreateOrderCommandDTOToRestaurant(createOrderCommand);
 
-        return restaurantRepository.findRestaurantInformation(cmdRestaurant.getId())
+        return restaurantRepository.findRestaurantInformation(cmdRestaurant)
                 .orElseThrow( () -> {
                     //log.warn("Could not find restaurant with id {}", createOrderCommand.getRestaurantId(); //TODO Log through controller advice
                     return new OrderDomainException(RESTAURANT_NOT_FOUND, createOrderCommand.getRestaurantId());

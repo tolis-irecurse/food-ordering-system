@@ -159,7 +159,7 @@ public class OrderApplicationServiceTest {
         order.setId(new OrderId(ORDER_ID));
 
         when(customerRepository.findCustomer(CUSTOMER_ID)).thenReturn(Optional.of(customer));
-        when(restaurantRepository.findRestaurantInformation(orderDataMapper.mapCreateOrderCommandDTOToRestaurant(createOrderCommand).getId())) //TODO: Check why getId() was required
+        when(restaurantRepository.findRestaurantInformation(orderDataMapper.mapCreateOrderCommandDTOToRestaurant(createOrderCommand)))
                 .thenReturn(Optional.of(restaurant));
 
         when(orderRepository.save(any(Order.class))).thenReturn(order);
@@ -206,7 +206,7 @@ public class OrderApplicationServiceTest {
             .active(false)
             .build();
 
-        when(restaurantRepository.findRestaurantInformation(orderDataMapper.mapCreateOrderCommandDTOToRestaurant(createOrderCommand).getId()))
+        when(restaurantRepository.findRestaurantInformation(orderDataMapper.mapCreateOrderCommandDTOToRestaurant(createOrderCommand)))
                 .thenReturn(Optional.of(restaurant));
 
         var orderDomainException =
