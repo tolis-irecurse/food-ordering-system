@@ -1,11 +1,13 @@
 package com.nttdata.food.ordering.system.order.service.messaging.mapper;
 
-import com.nttdata.food.ordering.system.kafka.order.avro.model.PaymentOrderStatus;
-import com.nttdata.food.ordering.system.kafka.order.avro.model.PaymentRequestAvroModel;
+import com.nttdata.food.ordering.system.kafka.order.avro.model.*;
+import com.nttdata.food.ordering.system.service.domain.event.OrderCancelledEvent;
 import com.nttdata.food.ordering.system.service.domain.event.OrderCreatedEvent;
+import com.nttdata.food.ordering.system.service.domain.event.OrderPaidEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Component
 public class OrderMessagingDataMapper {
@@ -25,9 +27,9 @@ public class OrderMessagingDataMapper {
                 .build();
     }
 
-    public PaymentRequestAvroModel mapOrderCancelledEventToPaymentRequestAvroModel(OrderCreatedEvent orderCreatedEvent) {
+    public PaymentRequestAvroModel mapOrderCancelledEventToPaymentRequestAvroModel(OrderCancelledEvent orderCancelledEvent) {
 
-        var order = orderCreatedEvent.getOrder();
+        var order = orderCancelledEvent.getOrder();
 
         return PaymentRequestAvroModel.newBuilder()
                 .setId(UUID.randomUUID())
@@ -35,9 +37,29 @@ public class OrderMessagingDataMapper {
                 .setCustomerId(order.getCustomerId().getValue())
                 .setOrderId(order.getId().getValue())
                 .setPrice(order.getPrice().getAmount())
-                .setCreatedAt(orderCreatedEvent.getCreatedAt().toInstant())
+                .setCreatedAt(orderCancelledEvent.getCreatedAt().toInstant())
                 .setPaymentOrderStatus(PaymentOrderStatus.CANCELLED)
                 .build();
 
+    }
+
+    public RestaurantApprovalRequestAvroModel mapOrderPaidEventToRestaurantApprovalRequestAvroModel(OrderPaidEvent orderPaidEvent) {
+        var order = orderPaidEvent.getOrder();
+
+        return RestaurantApprovalRequestAvroModel.newBuilder()
+                .setId(UUID.randomUUID()) //TODO: check these, perhaps convert to Strings as in tutorial?
+                .setSagaId(UUID.randomUUID())
+                .setOrderId(order.getId().getValue())
+                .setRestaurantId(order.getRestaurantId().getValue())
+                .setOrderId(order.getId().getValue())
+                .setRestaurantOrderStatus(RestaurantOrderStatus.valueOf(order.getOrderStatus().name()))
+                .setProducts(order.getItems().stream().map(orderItem -> Product.newBuilder()
+                        .setId(orderItem.getProduct().getId().getValue().toString())
+                        .setQuantity(orderItem.getQuantity())
+                        .build()).collect(Collectors.toList()))
+                .setPrice(order.getPrice().getAmount())
+                .setCreatedAt(orderPaidEvent.getCreatedAt().toInstant())
+                .setRestaurantOrderStatus(RestaurantOrderStatus.PAID)
+                .build();
     }
 }
