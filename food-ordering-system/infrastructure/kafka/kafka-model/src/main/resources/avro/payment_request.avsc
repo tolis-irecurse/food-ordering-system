@@ -6,29 +6,29 @@
         {
             "name": "id",
             "type": {
-                "type": "string",
-                "logicalType": "uuid"
+                "type": "string"
+                //"logicalType": "uuid"
             }
         },
         {
             "name": "sagaId",
             "type": {
-                "type": "string",
-                "logicalType": "uuid"
+                "type": "string"
+                //"logicalType": "uuid"
             }
         },
         {
             "name": "customerId",
             "type": {
-                "type": "string",
-                "logicalType": "uuid"
+                "type": "string"
+                //"logicalType": "uuid"
             }
         },
         {
             "name": "orderId",
             "type": {
-                "type": "string",
-                "logicalType": "uuid"
+                "type": "string"
+                //"logicalType": "uuid"
             }
         },
         {
@@ -51,7 +51,7 @@
             "name": "paymentOrderStatus",
             "type": {
                   "type": "enum",
-                  "name": "PaymentOrderStatus",
+                  "name": "PaymentOrderStatusAvroModel",
                   "symbols": ["PENDING", "CANCELLED"]
                }
         }

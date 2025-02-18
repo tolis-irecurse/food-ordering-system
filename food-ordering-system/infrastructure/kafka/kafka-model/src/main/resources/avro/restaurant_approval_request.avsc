@@ -6,36 +6,36 @@
     {
       "name": "id",
       "type": {
-        "type": "string",
-        "logicalType": "uuid"
+        "type": "string"
+        //"logicalType": "uuid"
       }
     },
     {
       "name": "sagaId",
       "type": {
-        "type": "string",
-        "logicalType": "uuid"
+        "type": "string"
+        //"logicalType": "uuid"
       }
     },
     {
       "name": "restaurantId",
       "type": {
-        "type": "string",
-        "logicalType": "uuid"
+        "type": "string"
+        //"logicalType": "uuid"
       }
     },
     {
       "name": "orderId",
       "type": {
-        "type": "string",
-        "logicalType": "uuid"
+        "type": "string"
+        //"logicalType": "uuid"
       }
     },
     {
       "name": "restaurantOrderStatus",
       "type": {
         "type": "enum",
-        "name": "RestaurantOrderStatus",
+        "name": "RestaurantOrderStatusAvroModel",
         "symbols": ["PAID"]
       }
     },
@@ -44,10 +44,10 @@
       "type": {
         "type": "array",
         "items":{
-          "name":"Product",
+          "name":"ProductAvroModel",
           "type":"record",
           "fields": [
-            {"name":"id", "type": "string", "logicalType": "uuid"}, //TODO: Check this out
+            {"name":"id", "type": "string"},// "logicalType": "uuid"}, //TODO: Check this out
             {"name":"quantity", "type": "int"}
           ]
         }
