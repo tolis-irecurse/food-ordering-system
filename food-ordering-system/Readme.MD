@@ -15,9 +15,9 @@ mvn com.github.ferstl:depgraph-maven-plugin:aggregate -DcreateImage=true -Dreduc
 ## Kafka
 
 ### Configuration
- - chown -R 1000:1000 ./volumes (for local data dir)
+ - sudo chown -R 1000:1000 ./volumes (for local data dir)
 
-### docker-compose
+### Kafka docker-compose
 To start kafka cluster as a daemon:
  - docker-compose -f common.yml -f kafka_cluster.yml up -d
 
@@ -26,3 +26,10 @@ To initialize the kafka topics:
 
 To stop the kafka cluster:
  - docker-compose -f common.yml -f kafka_cluster.yml down -v
+
+## POSTGRES
+- TBD
+
+## Build docker-image with maven plugin
+ - For Java 21 I had to set the Java version to 21
+ - I also had to disable the spring cloud bindings

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:17.4
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: food_ordering_user
+      POSTGRES_PASSWORD: yourpassword
+      POSTGRES_DB: food_ordering_db
+    volumes:
+#      - ./volumes/postgres_data:/var/lib/postgresql/data
+      - ../../order-service/order-container/src/main/resources/init-schema.sql:/docker-entrypoint-initdb.d/00-init-schema.sql
+      - ../../order-service/order-container/src/main/resources/restaurant-schema.sql:/docker-entrypoint-initdb.d/01-restaurant-schema.sql
+      - ../../order-service/order-container/src/main/resources/restaurant_data.sql:/docker-entrypoint-initdb.d/02-restaurant_data.sql
+#      - ../../order-service/order-container/src/main/resources/init-schema.sql:/docker-entrypoint-initdb.d/00-init.sql
+    ports:
+      - "5432:5432"
+    networks:
+      - ${GLOBAL_NETWORK:-postgres}
+
+#networks:
+#  ${GLOBAL_NETWORK:-postgres}
+
+volumes:
+  postgres_data:
