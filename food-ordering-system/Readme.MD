@@ -27,6 +27,9 @@ To initialize the kafka topics:
 To stop the kafka cluster:
  - docker-compose -f common.yml -f kafka_cluster.yml down -v
 
+### kafkacat command
+ - kcat -C -b localhost:19092 -t payment-request
+
 ## POSTGRES
 - TBD
 

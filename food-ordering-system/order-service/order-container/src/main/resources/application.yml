@@ -15,22 +15,24 @@ spring:
   jpa:
     open-in-view: false
     show-sql: true
-    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL9Dialect
-
-      datasource:
-        url: jdbc:postgresql://localhost:5432/postgres?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
-        username: postgres
-        password: admin
-        driver-class-name: org.postgresql.Driver
-        platform: postgres
-        schema: classpath:init-schema.sql
-        initialization-mode: always
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  datasource:
+    url: jdbc:postgresql://localhost:5432/food_ordering_db?currentSchema=order&binaryTransfer=true&reWriteBatchedInserts=true&stringtype=unspecified
+    username: food_ordering_user
+    password: yourpassword
+    driver-class-name: org.postgresql.Driver
+  sql:
+    init:
+      mode: always
+      platform: postgres
+      schema-locations: classpath:init-schema.sql,classpath:restaurant-schema.sql
+      data-locations: classpath:restaurant_data.sql
 
 kafka-config:
-  bootstrap-servers: localhost:9092, localhost:9094, localhost:9096
+  bootstrap-servers: localhost:19092, localhost:29092, localhost:39092
   schema-registry-url-key: schema.registry.url
   schema-registry-url: http://localhost:8081
   num-of-partitions: 3

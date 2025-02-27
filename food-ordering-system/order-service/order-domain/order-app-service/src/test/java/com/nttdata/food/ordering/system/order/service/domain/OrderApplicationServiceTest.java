@@ -80,13 +80,13 @@ public class OrderApplicationServiceTest {
                                     .productId(PRODUCT_ID)
                                     .quantity(1)
                                     .price(new BigDecimal("50.00"))
-                                    .subtotal(new BigDecimal("50.00"))
+                                    .subTotal(new BigDecimal("50.00"))
                                     .build(),
                             OrderItemDTO.builder()
                                     .productId(PRODUCT_ID)
                                     .quantity(3)
                                     .price(new BigDecimal("50.00"))
-                                    .subtotal(new BigDecimal("150.00"))
+                                    .subTotal(new BigDecimal("150.00"))
                                     .build())
                 )
                 .build();
@@ -106,13 +106,13 @@ public class OrderApplicationServiceTest {
                                         .productId(PRODUCT_ID)
                                         .quantity(1)
                                         .price(new BigDecimal("50.00"))
-                                        .subtotal(new BigDecimal("50.00"))
+                                        .subTotal(new BigDecimal("50.00"))
                                         .build(),
                                 OrderItemDTO.builder()
                                         .productId(PRODUCT_ID)
                                         .quantity(3)
                                         .price(new BigDecimal("50.00"))
-                                        .subtotal(new BigDecimal("150.00"))
+                                        .subTotal(new BigDecimal("150.00"))
                                         .build())
                 )
                 .build();
@@ -132,13 +132,13 @@ public class OrderApplicationServiceTest {
                                         .productId(PRODUCT_ID)
                                         .quantity(1)
                                         .price(new BigDecimal("60.00"))
-                                        .subtotal(new BigDecimal("60.00"))
+                                        .subTotal(new BigDecimal("60.00"))
                                         .build(),
                                 OrderItemDTO.builder()
                                         .productId(PRODUCT_ID)
                                         .quantity(3)
                                         .price(new BigDecimal("50.00"))
-                                        .subtotal(new BigDecimal("150.00"))
+                                        .subTotal(new BigDecimal("150.00"))
                                         .build())
                 )
                 .build();
