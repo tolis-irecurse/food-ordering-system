@@ -14,5 +14,6 @@
     <modules>
         <module>common-app</module>
         <module>common-domain</module>
+        <module>common-dataaccess</module>
     </modules>
 </project>
