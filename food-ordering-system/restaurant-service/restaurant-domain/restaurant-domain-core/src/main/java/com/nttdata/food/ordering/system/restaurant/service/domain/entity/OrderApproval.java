@@ -1,9 +1,10 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain.entity;
 
-import com.food.ordering.system.domain.entity.BaseEntity;
-import com.food.ordering.system.domain.valueobject.OrderApprovalStatus;
-import com.food.ordering.system.domain.valueobject.OrderId;
-import com.food.ordering.system.domain.valueobject.RestaurantId;
+
+import com.nttdata.food.ordering.system.common.domain.entity.BaseEntity;
+import com.nttdata.food.ordering.system.common.domain.valueobject.OrderApprovalStatus;
+import com.nttdata.food.ordering.system.common.domain.valueobject.OrderId;
+import com.nttdata.food.ordering.system.common.domain.valueobject.RestaurantId;
 import com.nttdata.food.ordering.system.restaurant.service.domain.valueobject.OrderApprovalId;
 
 public class OrderApproval extends BaseEntity<OrderApprovalId> {

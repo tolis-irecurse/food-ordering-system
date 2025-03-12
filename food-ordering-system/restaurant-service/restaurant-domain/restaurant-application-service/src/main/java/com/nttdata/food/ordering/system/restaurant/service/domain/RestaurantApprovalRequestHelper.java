@@ -1,10 +1,10 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain;
 
-import com.food.ordering.system.domain.valueobject.OrderId;
+import com.nttdata.food.ordering.system.common.domain.valueobject.OrderId;
 import com.nttdata.food.ordering.system.restaurant.service.domain.dto.RestaurantApprovalRequest;
-import com.food.ordering.system.restaurant.service.domain.entity.Restaurant;
-import com.food.ordering.system.restaurant.service.domain.event.OrderApprovalEvent;
-import com.food.ordering.system.restaurant.service.domain.exception.RestaurantNotFoundException;
+import com.nttdata.food.ordering.system.restaurant.service.domain.entity.Restaurant;
+import com.nttdata.food.ordering.system.restaurant.service.domain.event.OrderApprovalEvent;
+import com.nttdata.food.ordering.system.restaurant.service.domain.exception.RestaurantNotFoundException;
 import com.nttdata.food.ordering.system.restaurant.service.domain.mapper.RestaurantDataMapper;
 import com.nttdata.food.ordering.system.restaurant.service.domain.ports.output.message.publisher.OrderApprovedMessagePublisher;
 import com.nttdata.food.ordering.system.restaurant.service.domain.ports.output.message.publisher.OrderRejectedMessagePublisher;
@@ -18,6 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+
+import static com.nttdata.food.ordering.system.common.domain.code.DomainErrorCode.RESTAURANT_NOT_FOUND;
 
 @Slf4j
 @Component
@@ -65,8 +67,7 @@ public class RestaurantApprovalRequestHelper {
         Optional<Restaurant> restaurantResult = restaurantRepository.findRestaurantInformation(restaurant);
         if (restaurantResult.isEmpty()) {
             log.error("Restaurant with id " + restaurant.getId().getValue() + " not found!");
-            throw new RestaurantNotFoundException("Restaurant with id " + restaurant.getId().getValue() +
-                    " not found!");
+            throw new RestaurantNotFoundException(RESTAURANT_NOT_FOUND, restaurant.getId().getValue());
         }
 
         Restaurant restaurantEntity = restaurantResult.get();

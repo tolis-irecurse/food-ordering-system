@@ -2,8 +2,8 @@ package com.nttdata.food.ordering.system.restaurant.service.dataaccess.restauran
 
 import com.nttdata.food.ordering.system.restaurant.service.dataaccess.restaurant.mapper.RestaurantDataAccessMapper;
 import com.nttdata.food.ordering.system.restaurant.service.dataaccess.restaurant.repository.OrderApprovalJpaRepository;
-import com.food.ordering.system.restaurant.service.domain.entity.OrderApproval;
-import com.food.ordering.system.restaurant.service.domain.ports.output.repository.OrderApprovalRepository;
+import com.nttdata.food.ordering.system.restaurant.service.domain.entity.OrderApproval;
+import com.nttdata.food.ordering.system.restaurant.service.domain.ports.output.repository.OrderApprovalRepository;
 import org.springframework.stereotype.Component;
 
 @Component

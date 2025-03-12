@@ -1,7 +1,7 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain.dto;
 
-import com.food.ordering.system.domain.valueobject.RestaurantOrderStatus;
-import com.food.ordering.system.restaurant.service.domain.entity.Product;
+import com.nttdata.food.ordering.system.common.domain.valueobject.RestaurantOrderStatus;
+import com.nttdata.food.ordering.system.restaurant.service.domain.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

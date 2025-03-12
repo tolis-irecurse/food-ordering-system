@@ -1,7 +1,7 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain.event;
 
-import com.food.ordering.system.domain.event.DomainEvent;
-import com.food.ordering.system.domain.valueobject.RestaurantId;
+import com.nttdata.food.ordering.system.common.domain.event.DomainEvent;
+import com.nttdata.food.ordering.system.common.domain.valueobject.RestaurantId;
 import com.nttdata.food.ordering.system.restaurant.service.domain.entity.OrderApproval;
 
 import java.time.ZonedDateTime;

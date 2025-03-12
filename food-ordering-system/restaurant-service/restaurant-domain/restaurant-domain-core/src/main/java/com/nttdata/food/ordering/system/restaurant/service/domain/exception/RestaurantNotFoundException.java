@@ -1,13 +1,15 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain.exception;
 
-import com.food.ordering.system.domain.exception.DomainException;
+import com.nttdata.food.ordering.system.common.domain.code.IDomainErrorCode;
+import com.nttdata.food.ordering.system.common.domain.exception.DomainException;
 
 public class RestaurantNotFoundException extends DomainException {
-    public RestaurantNotFoundException(String message) {
-        super(message);
+
+    public RestaurantNotFoundException(IDomainErrorCode errorCode, Object... params) {
+        super(errorCode, params);
     }
 
-    public RestaurantNotFoundException(String message, Throwable cause) {
-        super(message, cause);
+    public RestaurantNotFoundException(Throwable cause, IDomainErrorCode domainErrorCode, Object... params) {
+        super(cause, domainErrorCode, params);
     }
 }

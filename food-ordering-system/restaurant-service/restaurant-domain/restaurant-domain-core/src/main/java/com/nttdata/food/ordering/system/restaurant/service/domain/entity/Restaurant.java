@@ -1,10 +1,10 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain.entity;
 
-import com.food.ordering.system.domain.entity.AggregateRoot;
-import com.food.ordering.system.domain.valueobject.Money;
-import com.food.ordering.system.domain.valueobject.OrderApprovalStatus;
-import com.food.ordering.system.domain.valueobject.OrderStatus;
-import com.food.ordering.system.domain.valueobject.RestaurantId;
+import com.nttdata.food.ordering.system.common.domain.entity.AggregateRoot;
+import com.nttdata.food.ordering.system.common.domain.valueobject.Money;
+import com.nttdata.food.ordering.system.common.domain.valueobject.OrderApprovalStatus;
+import com.nttdata.food.ordering.system.common.domain.valueobject.OrderStatus;
+import com.nttdata.food.ordering.system.common.domain.valueobject.RestaurantId;
 import com.nttdata.food.ordering.system.restaurant.service.domain.valueobject.OrderApprovalId;
 
 import java.util.List;

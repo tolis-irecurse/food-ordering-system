@@ -1,15 +1,14 @@
 package com.nttdata.food.ordering.system.restaurant.service.messaging.mapper;
 
-
-import com.food.ordering.system.domain.valueobject.ProductId;
-import com.food.ordering.system.domain.valueobject.RestaurantOrderStatus;
-import com.food.ordering.system.kafka.order.avro.model.OrderApprovalStatus;
-import com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalRequestAvroModel;
-import com.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel;
-import com.food.ordering.system.restaurant.service.domain.dto.RestaurantApprovalRequest;
-import com.food.ordering.system.restaurant.service.domain.entity.Product;
-import com.food.ordering.system.restaurant.service.domain.event.OrderApprovedEvent;
-import com.food.ordering.system.restaurant.service.domain.event.OrderRejectedEvent;
+import com.nttdata.food.ordering.system.common.domain.valueobject.ProductId;
+import com.nttdata.food.ordering.system.common.domain.valueobject.RestaurantOrderStatus;
+import com.nttdata.food.ordering.system.kafka.order.avro.model.OrderApprovalStatusAvroModel;
+import com.nttdata.food.ordering.system.kafka.order.avro.model.RestaurantApprovalRequestAvroModel;
+import com.nttdata.food.ordering.system.kafka.order.avro.model.RestaurantApprovalResponseAvroModel;
+import com.nttdata.food.ordering.system.restaurant.service.domain.dto.RestaurantApprovalRequest;
+import com.nttdata.food.ordering.system.restaurant.service.domain.entity.Product;
+import com.nttdata.food.ordering.system.restaurant.service.domain.event.OrderApprovedEvent;
+import com.nttdata.food.ordering.system.restaurant.service.domain.event.OrderRejectedEvent;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -25,7 +24,7 @@ public class RestaurantMessagingDataMapper {
                 .setOrderId(orderApprovedEvent.getOrderApproval().getOrderId().getValue().toString())
                 .setRestaurantId(orderApprovedEvent.getRestaurantId().getValue().toString())
                 .setCreatedAt(orderApprovedEvent.getCreatedAt().toInstant())
-                .setOrderApprovalStatus(OrderApprovalStatus.valueOf(orderApprovedEvent.
+                .setOrderApprovalStatus(OrderApprovalStatusAvroModel.valueOf(orderApprovedEvent.
                         getOrderApproval().getApprovalStatus().name()))
                 .setFailureMessages(orderApprovedEvent.getFailureMessages())
                 .build();
@@ -39,7 +38,7 @@ public class RestaurantMessagingDataMapper {
                 .setOrderId(orderRejectedEvent.getOrderApproval().getOrderId().getValue().toString())
                 .setRestaurantId(orderRejectedEvent.getRestaurantId().getValue().toString())
                 .setCreatedAt(orderRejectedEvent.getCreatedAt().toInstant())
-                .setOrderApprovalStatus(OrderApprovalStatus.valueOf(orderRejectedEvent.
+                .setOrderApprovalStatus(OrderApprovalStatusAvroModel.valueOf(orderRejectedEvent.
                         getOrderApproval().getApprovalStatus().name()))
                 .setFailureMessages(orderRejectedEvent.getFailureMessages())
                 .build();

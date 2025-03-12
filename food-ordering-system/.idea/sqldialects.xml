@@ -6,6 +6,8 @@
     <file url="file://$PROJECT_DIR$/order-service/order-container/src/main/resources/restaurant-schema.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/payment-service/payment-container/src/main/resources/init-data.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/payment-service/payment-container/src/main/resources/init-schema.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-container/src/main/resources/init-data.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/restaurant-service/restaurant-container/src/main/resources/init-schema.sql" dialect="PostgreSQL" />
     <file url="PROJECT" dialect="PostgreSQL" />
   </component>
 </project>

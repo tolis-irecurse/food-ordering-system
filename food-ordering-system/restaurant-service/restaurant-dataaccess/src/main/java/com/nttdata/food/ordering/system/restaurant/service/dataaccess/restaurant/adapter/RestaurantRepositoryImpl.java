@@ -3,8 +3,8 @@ package com.nttdata.food.ordering.system.restaurant.service.dataaccess.restauran
 import com.nttdata.food.ordering.system.dataaccess.restaurant.entity.RestaurantEntity;
 import com.nttdata.food.ordering.system.dataaccess.restaurant.repository.RestaurantJpaRepository;
 import com.nttdata.food.ordering.system.restaurant.service.dataaccess.restaurant.mapper.RestaurantDataAccessMapper;
-import com.food.ordering.system.restaurant.service.domain.entity.Restaurant;
-import com.food.ordering.system.restaurant.service.domain.ports.output.repository.RestaurantRepository;
+import com.nttdata.food.ordering.system.restaurant.service.domain.entity.Restaurant;
+import com.nttdata.food.ordering.system.restaurant.service.domain.ports.output.repository.RestaurantRepository;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

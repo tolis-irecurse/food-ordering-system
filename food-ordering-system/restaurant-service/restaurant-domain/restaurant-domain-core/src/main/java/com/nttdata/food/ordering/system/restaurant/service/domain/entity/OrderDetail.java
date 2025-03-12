@@ -1,9 +1,9 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain.entity;
 
-import com.food.ordering.system.domain.entity.BaseEntity;
-import com.food.ordering.system.domain.valueobject.Money;
-import com.food.ordering.system.domain.valueobject.OrderId;
-import com.food.ordering.system.domain.valueobject.OrderStatus;
+import com.nttdata.food.ordering.system.common.domain.entity.BaseEntity;
+import com.nttdata.food.ordering.system.common.domain.valueobject.Money;
+import com.nttdata.food.ordering.system.common.domain.valueobject.OrderId;
+import com.nttdata.food.ordering.system.common.domain.valueobject.OrderStatus;
 
 import java.util.List;
 

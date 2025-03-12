@@ -1,8 +1,8 @@
 package com.nttdata.food.ordering.system.restaurant.service.domain.entity;
 
-import com.food.ordering.system.domain.entity.BaseEntity;
-import com.food.ordering.system.domain.valueobject.Money;
-import com.food.ordering.system.domain.valueobject.ProductId;
+import com.nttdata.food.ordering.system.common.domain.entity.BaseEntity;
+import com.nttdata.food.ordering.system.common.domain.valueobject.Money;
+import com.nttdata.food.ordering.system.common.domain.valueobject.ProductId;
 
 public class Product extends BaseEntity<ProductId> {
     private String name;
