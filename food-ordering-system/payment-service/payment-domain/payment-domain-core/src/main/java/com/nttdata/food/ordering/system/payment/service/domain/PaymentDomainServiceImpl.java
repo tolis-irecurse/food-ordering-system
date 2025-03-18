@@ -43,11 +43,11 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
         if (failureMessages.isEmpty()) {
             log.info("Payment is initiated for order id: {}", payment.getOrderId().getValue());
             payment.updateStatus(PaymentStatus.COMPLETED);
-            return new PaymentCompletedEvent(payment, ZonedDateTime.now(ZONE_UTC));
+            return new PaymentCompletedEvent(payment, ZonedDateTime.now(ZONE_UTC), paymentCompletedEventDomainEventPublisher);
         } else {
             log.info("Payment initiation is failed for order id: {}", payment.getOrderId().getValue());
             payment.updateStatus(PaymentStatus.FAILED);
-            return new PaymentFailedEvent(payment, ZonedDateTime.now(ZONE_UTC), failureMessages);
+            return new PaymentFailedEvent(payment, ZonedDateTime.now(ZONE_UTC), failureMessages, paymentFailedEventDomainEventPublisher);
         }
     }
 
@@ -67,11 +67,11 @@ public class PaymentDomainServiceImpl implements PaymentDomainService {
        if (failureMessages.isEmpty()) {
            log.info("Payment is cancelled for order id: {}", payment.getOrderId().getValue());
            payment.updateStatus(PaymentStatus.CANCELLED);
-           return new PaymentCancelledEvent(payment, ZonedDateTime.now(ZONE_UTC));
+           return new PaymentCancelledEvent(payment, ZonedDateTime.now(ZONE_UTC), paymentCancelledEventDomainEventPublisher);
        } else {
            log.info("Payment cancellation is failed for order id: {}", payment.getOrderId().getValue());
            payment.updateStatus(PaymentStatus.FAILED);
-           return new PaymentFailedEvent(payment, ZonedDateTime.now(ZONE_UTC), failureMessages);
+           return new PaymentFailedEvent(payment, ZonedDateTime.now(ZONE_UTC), failureMessages, paymentFailedEventDomainEventPublisher);
        }
     }
 

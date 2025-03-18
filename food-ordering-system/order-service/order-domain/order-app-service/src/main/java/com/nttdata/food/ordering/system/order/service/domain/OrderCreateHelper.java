@@ -2,6 +2,7 @@ package com.nttdata.food.ordering.system.order.service.domain;
 
 import com.nttdata.food.ordering.system.order.service.domain.dto.create.CreateOrderCommandDTO;
 import com.nttdata.food.ordering.system.order.service.domain.mapper.OrderDataMapper;
+import com.nttdata.food.ordering.system.order.service.domain.ports.output.message.publisher.payment.OrderCreatedPaymentRequestMessagePublisher;
 import com.nttdata.food.ordering.system.order.service.domain.ports.output.repository.CustomerRepository;
 import com.nttdata.food.ordering.system.order.service.domain.ports.output.repository.OrderRepository;
 import com.nttdata.food.ordering.system.order.service.domain.ports.output.repository.RestaurantRepository;
@@ -21,22 +22,26 @@ import static com.nttdata.food.ordering.system.common.domain.code.DomainErrorCod
 @Slf4j
 @Component
 public class OrderCreateHelper {
+
     private final OrderDomainService orderDomainService;
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     private final RestaurantRepository restaurantRepository;
     private final OrderDataMapper orderDataMapper;
+    private final OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher;
 
     public OrderCreateHelper(OrderDomainService orderDomainService,
                              OrderRepository orderRepository,
                              CustomerRepository customerRepository,
                              RestaurantRepository restaurantRepository,
-                             OrderDataMapper orderDataMapper) {
+                             OrderDataMapper orderDataMapper,
+                             OrderCreatedPaymentRequestMessagePublisher orderCreatedPaymentRequestMessagePublisher) {
         this.orderDomainService = orderDomainService;
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
         this.restaurantRepository = restaurantRepository;
         this.orderDataMapper = orderDataMapper;
+        this.orderCreatedPaymentRequestMessagePublisher = orderCreatedPaymentRequestMessagePublisher;
     }
 
     @Transactional
@@ -45,7 +50,7 @@ public class OrderCreateHelper {
 
         var restaurant = checkRestaurant(createOrderCommand);
         var order = orderDataMapper.mapCreateOrderCommandDTOToOrder(createOrderCommand);
-        var orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant);
+        var orderCreatedEvent = orderDomainService.validateAndInitiateOrder(order, restaurant, orderCreatedPaymentRequestMessagePublisher);
         saveOrder(order);
         log.info("Order with id {} has been created", orderCreatedEvent.getOrder().getId().getValue() );
 

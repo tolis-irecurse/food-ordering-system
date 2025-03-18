@@ -1,7 +1,6 @@
 package com.nttdata.food.ordering.system.payment.service.domain;
 
 import com.nttdata.food.ordering.system.payment.service.domain.dto.PaymentRequest;
-import com.nttdata.food.ordering.system.payment.service.domain.event.PaymentEvent;
 import com.nttdata.food.ordering.system.payment.service.domain.ports.input.message.listener.PaymentRequestMessageListener;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -18,11 +17,11 @@ public class PaymentRequestMessageListenerImpl implements PaymentRequestMessageL
 
     @Override
     public void completePayment(PaymentRequest paymentRequest) {
-        PaymentEvent paymentEvent = paymentRequestHelper.persistPayment(paymentRequest);
+        paymentRequestHelper.persistPayment(paymentRequest);
     }
 
     @Override
     public void cancelPayment(PaymentRequest paymentRequest) {
-        PaymentEvent paymentEvent = paymentRequestHelper.persistCancelPayment(paymentRequest);
+        paymentRequestHelper.persistCancelPayment(paymentRequest);
     }
 }

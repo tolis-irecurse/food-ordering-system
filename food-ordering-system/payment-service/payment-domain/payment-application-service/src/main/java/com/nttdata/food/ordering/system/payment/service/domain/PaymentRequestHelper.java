@@ -16,6 +16,7 @@ import com.nttdata.food.ordering.system.payment.service.domain.ports.output.repo
 import com.nttdata.food.ordering.system.payment.service.domain.ports.output.repository.CreditHistoryRepository;
 import com.nttdata.food.ordering.system.payment.service.domain.ports.output.repository.PaymentRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +38,7 @@ public class PaymentRequestHelper {
     private final PaymentCancelledMessagePublisher paymentCancelledEventDomainEventPublisher;
     private final PaymentFailedMessagePublisher paymentFailedEventDomainEventPublisher;
 
+    @Autowired
     public PaymentRequestHelper(PaymentDomainService paymentDomainService,
                                 PaymentDataMapper paymentDataMapper,
                                 PaymentRepository paymentRepository,
